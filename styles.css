@@ -14,9 +14,14 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   margin: 0;
-  min-height: 100vh;
+  overflow: hidden;
   color: var(--text);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   background: linear-gradient(180deg, #fff7e3 0%, #fffdf7 60%);
@@ -32,9 +37,13 @@ button {
 }
 
 .app-shell {
-  width: min(1080px, calc(100% - 32px));
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 14px;
+  width: min(1000px, calc(100% - 28px));
+  height: 100dvh;
   margin: 0 auto;
-  padding: 36px 0 56px;
+  padding: 16px 0;
 }
 
 .hero {
@@ -43,34 +52,32 @@ button {
 
 .hero h1 {
   margin: 0;
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  letter-spacing: -0.04em;
-}
-
-.intro {
-  margin: 10px 0 0;
-  color: var(--muted);
+  font-size: clamp(1.5rem, 3.4vw, 2.3rem);
+  letter-spacing: -0.03em;
 }
 
 .hives-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 14px;
-  margin: 30px 0;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  min-height: 0;
 }
 
 .hive {
-  padding: 8px;
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  padding: 4px;
   border: 2px solid transparent;
-  border-radius: 18px;
+  border-radius: 16px;
   background: transparent;
-  transition: transform 0.12s ease;
 }
 
 .hive:hover,
 .hive:focus-visible {
   outline: none;
-  transform: translateY(-3px);
+  border-color: rgba(227, 154, 5, 0.5);
 }
 
 .hive.selected {
@@ -81,7 +88,7 @@ button {
 .hive-icon {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 
 .hive-roof {
@@ -113,7 +120,6 @@ button {
 
 .hive.selected .hive-badge {
   fill: var(--honey);
-  stroke: var(--honey-dark);
 }
 
 .hive.selected .hive-digit {
@@ -125,80 +131,85 @@ button {
 }
 
 .planner {
-  padding: 22px;
+  display: grid;
+  gap: 8px;
+  padding: 14px 16px 12px;
   border: 1px solid var(--border);
-  border-radius: 22px;
+  border-radius: 18px;
   background: var(--surface);
-  box-shadow: 0 14px 32px rgba(84, 59, 12, 0.09);
+  box-shadow: 0 10px 26px rgba(84, 59, 12, 0.09);
 }
 
 .planner-header {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
 }
 
 .planner-header h2 {
   margin: 0;
-  font-size: 1.4rem;
+  font-size: 1.15rem;
 }
 
 .month-controls {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
 }
 
 .month-controls button {
-  width: 38px;
-  height: 38px;
+  width: 30px;
+  height: 30px;
   color: var(--honey-dark);
   border: 0;
   border-radius: 999px;
   background: #fdf1d3;
-  font-size: 1.2rem;
+  font-size: 1rem;
   line-height: 1;
 }
 
 .month-controls strong {
-  min-width: 160px;
+  min-width: 140px;
+  font-size: 0.95rem;
   text-align: center;
   text-transform: capitalize;
 }
 
-.weekdays,
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
+.day-strip {
+  display: flex;
   gap: 6px;
-}
-
-.weekdays {
-  margin-bottom: 6px;
-  color: var(--muted);
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-align: center;
-  text-transform: uppercase;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+  scroll-snap-type: x proximity;
 }
 
 .day {
   position: relative;
-  aspect-ratio: 1;
   display: grid;
+  flex: 0 0 auto;
+  gap: 1px;
   place-items: center;
+  width: 42px;
+  padding: 5px 0 8px;
   color: var(--text);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 10px;
   background: #fffdf8;
+  scroll-snap-align: center;
 }
 
-.day.blank {
-  border: 0;
-  background: none;
+.day-weekday {
+  color: var(--muted);
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.day strong {
+  font-size: 0.95rem;
 }
 
 .day:hover,
@@ -208,7 +219,6 @@ button {
 }
 
 .day.today {
-  font-weight: 800;
   border-color: var(--honey);
 }
 
@@ -218,11 +228,15 @@ button {
   background: var(--honey-dark);
 }
 
+.day.selected .day-weekday {
+  color: rgba(255, 255, 255, 0.85);
+}
+
 .day.has-note::after {
   position: absolute;
-  bottom: 6px;
-  width: 6px;
-  height: 6px;
+  bottom: 3px;
+  width: 5px;
+  height: 5px;
   content: "";
   border-radius: 999px;
   background: var(--honey);
@@ -233,19 +247,19 @@ button {
 }
 
 .note-label {
-  display: block;
-  margin: 22px 0 8px;
+  font-size: 0.9rem;
   font-weight: 700;
   text-transform: capitalize;
 }
 
 .note-text {
   width: 100%;
-  resize: vertical;
-  padding: 14px;
+  height: 96px;
+  resize: none;
+  padding: 10px 12px;
   color: var(--text);
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: 12px;
   background: #fffdf8;
 }
 
@@ -255,25 +269,25 @@ button {
 }
 
 .save-status {
-  min-height: 1.3em;
-  margin: 8px 0 0;
+  min-height: 1.1em;
+  margin: 0;
   color: var(--muted);
-  font-size: 0.88rem;
+  font-size: 0.82rem;
 }
 
 @media (max-width: 620px) {
   .app-shell {
-    width: calc(100% - 20px);
-    padding-top: 22px;
+    width: calc(100% - 18px);
+    gap: 10px;
+    padding: 10px 0;
   }
 
   .hives-grid {
-    gap: 8px;
-    margin: 22px 0;
+    gap: 6px;
   }
 
   .planner {
-    padding: 16px;
+    padding: 12px;
   }
 
   .month-controls {
@@ -285,8 +299,17 @@ button {
     min-width: auto;
   }
 
-  .day {
-    border-radius: 9px;
-    font-size: 0.9rem;
+  .note-text {
+    height: 74px;
+  }
+}
+
+@media (max-height: 620px) {
+  .note-text {
+    height: 62px;
+  }
+
+  .hero h1 {
+    font-size: 1.3rem;
   }
 }

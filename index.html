@@ -10,7 +10,6 @@
     <main class="app-shell">
       <header class="hero">
         <h1>Diario delle arnie</h1>
-        <p class="intro">Scegli l'arnia, tocca il giorno, scrivi. Si salva da solo.</p>
       </header>
 
       <div id="hives-grid" class="hives-grid" aria-label="Le tue arnie"></div>
@@ -25,22 +24,12 @@
           </div>
         </div>
 
-        <div class="weekdays" aria-hidden="true">
-          <span>Lun</span>
-          <span>Mar</span>
-          <span>Mer</span>
-          <span>Gio</span>
-          <span>Ven</span>
-          <span>Sab</span>
-          <span>Dom</span>
-        </div>
-        <div id="calendar-grid" class="calendar-grid"></div>
+        <div id="day-strip" class="day-strip" aria-label="Giorni del mese"></div>
 
         <label id="note-label" class="note-label" for="note-text"></label>
         <textarea
           id="note-text"
           class="note-text"
-          rows="5"
           placeholder="Cosa hai fatto? Es. controllo covata, nutrizione, melario..."
         ></textarea>
         <p id="save-status" class="save-status" role="status" aria-live="polite"></p>

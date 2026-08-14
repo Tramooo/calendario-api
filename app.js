@@ -5,7 +5,7 @@ const SAVE_DELAY = 400;
 const hivesGrid = document.querySelector("#hives-grid");
 const plannerTitle = document.querySelector("#planner-title");
 const monthLabel = document.querySelector("#month-label");
-const calendarGrid = document.querySelector("#calendar-grid");
+const dayStrip = document.querySelector("#day-strip");
 const previousMonthButton = document.querySelector("#previous-month");
 const nextMonthButton = document.querySelector("#next-month");
 const noteLabel = document.querySelector("#note-label");
@@ -127,8 +127,7 @@ function getMonthDays(monthStart) {
   const year = monthStart.getFullYear();
   const month = monthStart.getMonth();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
-  const leadingBlanks = (new Date(year, month, 1).getDay() + 6) % 7;
-  const days = new Array(leadingBlanks).fill(null);
+  const days = [];
 
   for (let day = 1; day <= daysInMonth; day += 1) {
     days.push(new Date(year, month, day));
@@ -137,45 +136,54 @@ function getMonthDays(monthStart) {
   return days;
 }
 
-function renderCalendar() {
-  calendarGrid.innerHTML = "";
+function renderDayStrip() {
+  dayStrip.innerHTML = "";
   monthLabel.textContent = new Intl.DateTimeFormat("it-IT", {
     month: "long",
     year: "numeric",
   }).format(visibleMonth);
 
   getMonthDays(visibleMonth).forEach((date) => {
-    if (!date) {
-      const blank = document.createElement("span");
-      blank.className = "day blank";
-      calendarGrid.append(blank);
-      return;
-    }
-
     const dateKey = toDateKey(date);
     const button = document.createElement("button");
+    const weekday = document.createElement("span");
+    const dayNumber = document.createElement("strong");
+
+    weekday.className = "day-weekday";
+    weekday.textContent = new Intl.DateTimeFormat("it-IT", { weekday: "short" })
+      .format(date)
+      .slice(0, 2);
+    dayNumber.textContent = String(date.getDate());
+
     button.type = "button";
     button.className = "day";
     button.dataset.date = dateKey;
-    button.textContent = String(date.getDate());
     button.setAttribute("aria-label", formatDate(dateKey));
+    button.append(weekday, dayNumber);
 
     if (dateKey === toDateKey(today)) {
       button.classList.add("today");
     }
 
     button.addEventListener("click", () => selectDate(dateKey));
-    calendarGrid.append(button);
+    dayStrip.append(button);
   });
 
   markDaysWithNotes();
+  scrollSelectedDayIntoView();
 }
 
 function markDaysWithNotes() {
-  calendarGrid.querySelectorAll(".day[data-date]").forEach((button) => {
+  dayStrip.querySelectorAll(".day").forEach((button) => {
     button.classList.toggle("has-note", Boolean(getNote(selectedHive, button.dataset.date)));
     button.classList.toggle("selected", button.dataset.date === selectedDate);
   });
+}
+
+function scrollSelectedDayIntoView() {
+  const selectedDay = dayStrip.querySelector(".day.selected") || dayStrip.querySelector(".today");
+
+  selectedDay?.scrollIntoView({ block: "nearest", inline: "center" });
 }
 
 function renderNote() {
@@ -196,13 +204,14 @@ function selectDate(dateKey) {
   flushPendingSave();
   selectedDate = dateKey;
   markDaysWithNotes();
+  scrollSelectedDayIntoView();
   renderNote();
   noteText.focus();
 }
 
 function changeMonth(offset) {
   visibleMonth = new Date(visibleMonth.getFullYear(), visibleMonth.getMonth() + offset, 1);
-  renderCalendar();
+  renderDayStrip();
 }
 
 function flushPendingSave() {
@@ -228,5 +237,5 @@ previousMonthButton.addEventListener("click", () => changeMonth(-1));
 nextMonthButton.addEventListener("click", () => changeMonth(1));
 
 renderHives();
-renderCalendar();
+renderDayStrip();
 renderNote();
