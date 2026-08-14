@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Diario Arnie</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="hero">
+        <p class="eyebrow">Registro apistico</p>
+        <h1>Diario delle arnie</h1>
+        <p class="intro">
+          Seleziona un'arnia e annota, giorno per giorno, le attivita svolte.
+        </p>
+      </header>
+
+      <section class="hives-section" aria-labelledby="hives-title">
+        <div class="section-heading">
+          <h2 id="hives-title">Le tue 10 arnie</h2>
+          <p>Disposte in 2 file da 5, come richiesto.</p>
+        </div>
+        <div id="hives-grid" class="hives-grid" aria-label="Elenco arnie"></div>
+      </section>
+
+      <section class="planner" aria-labelledby="planner-title">
+        <div class="planner-header">
+          <div>
+            <p class="eyebrow">Calendario attivita</p>
+            <h2 id="planner-title">Note per <span id="selected-hive-label">Arnia 1</span></h2>
+          </div>
+          <div class="month-controls" aria-label="Controlli calendario">
+            <button id="previous-month" type="button" aria-label="Mese precedente">Precedente</button>
+            <strong id="month-label"></strong>
+            <button id="next-month" type="button" aria-label="Mese successivo">Successivo</button>
+          </div>
+        </div>
+
+        <div class="planner-layout">
+          <div class="calendar-card">
+            <div class="weekdays" aria-hidden="true">
+              <span>Lun</span>
+              <span>Mar</span>
+              <span>Mer</span>
+              <span>Gio</span>
+              <span>Ven</span>
+              <span>Sab</span>
+              <span>Dom</span>
+            </div>
+            <div id="calendar-grid" class="calendar-grid"></div>
+          </div>
+
+          <form id="note-form" class="note-panel">
+            <div>
+              <p class="eyebrow">Giorno selezionato</p>
+              <h3 id="selected-date-label"></h3>
+            </div>
+            <label for="note-text">Cosa hai fatto in questa arnia?</label>
+            <textarea
+              id="note-text"
+              rows="9"
+              placeholder="Esempio: controllo covata, nutrizione, trattamento, aggiunta melario..."
+            ></textarea>
+            <div class="note-actions">
+              <button class="primary-button" type="submit">Salva nota</button>
+              <button id="delete-note" class="secondary-button" type="button">Elimina nota</button>
+            </div>
+            <p id="save-status" class="save-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
