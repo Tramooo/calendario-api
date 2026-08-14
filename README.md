@@ -43,8 +43,10 @@ Variabile opzionale, ma consigliata:
 
 La tabella va creata una sola volta. Due modi equivalenti.
 
-Dalla console Neon: apri il progetto, vai nell'SQL Editor e incolla il contenuto di
-`db/schema.sql`.
+Da browser: apri l'editor SQL della base dati (dalla dashboard Vercel e in Storage, sezione
+Browser, linguetta Query; nella console Neon si chiama SQL Editor) ed esegui le istruzioni di
+`db/schema.sql`. L'editor di Vercel accetta una sola istruzione per volta, quindi va lanciata prima
+la `create table` e poi la `create index`, in due esecuzioni separate.
 
 Oppure dal tuo computer, scaricando le variabili dal progetto Vercel:
 
