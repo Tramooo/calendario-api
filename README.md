@@ -10,6 +10,7 @@ App web statica per tenere traccia delle attivita svolte nelle arnie.
 - 10 arnie in 2 file da 5, ognuna con icona numerata e propria casella di testo.
 - Ogni casella salva da sola le attivita del giorno selezionato.
 - Pallino sui giorni del calendario che hanno gia delle note.
+- Titolo illustrato con ape e fregio a nido d'ape, piu api decorative animate.
 - Dati salvati nel browser tramite localStorage.
 
 ## Avvio locale

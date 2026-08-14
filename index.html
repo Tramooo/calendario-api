@@ -7,9 +7,53 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+    <svg class="sprite" aria-hidden="true" focusable="false">
+      <defs>
+        <clipPath id="bee-body-clip">
+          <ellipse cx="48" cy="48" rx="27" ry="17"></ellipse>
+        </clipPath>
+        <symbol id="bee" viewBox="0 0 100 80">
+          <g class="bee-wings">
+            <ellipse cx="44" cy="29" rx="18" ry="10" transform="rotate(-20 44 29)"></ellipse>
+            <ellipse cx="61" cy="27" rx="13" ry="8" transform="rotate(16 61 27)"></ellipse>
+          </g>
+          <path class="bee-sting" d="M21 44 L7 48 L21 52 Z"></path>
+          <ellipse class="bee-body" cx="48" cy="48" rx="27" ry="17"></ellipse>
+          <g class="bee-stripes" clip-path="url(#bee-body-clip)">
+            <rect x="34" y="24" width="9" height="48" transform="rotate(9 38 48)"></rect>
+            <rect x="50" y="24" width="9" height="48" transform="rotate(9 54 48)"></rect>
+            <rect x="66" y="24" width="9" height="48" transform="rotate(9 70 48)"></rect>
+          </g>
+          <path class="bee-antenna" d="M79 33 Q81 21 90 18"></path>
+          <path class="bee-antenna" d="M73 31 Q70 19 61 15"></path>
+          <circle class="bee-head" cx="80" cy="45" r="12"></circle>
+          <circle class="bee-eye" cx="85" cy="42" r="3.2"></circle>
+        </symbol>
+      </defs>
+    </svg>
+
+    <div class="bees" aria-hidden="true">
+      <svg class="bee bee-1"><use href="#bee"></use></svg>
+      <svg class="bee bee-2"><use href="#bee"></use></svg>
+      <svg class="bee bee-3"><use href="#bee"></use></svg>
+      <svg class="bee bee-4"><use href="#bee"></use></svg>
+      <svg class="bee bee-5"><use href="#bee"></use></svg>
+      <svg class="bee bee-6"><use href="#bee"></use></svg>
+    </div>
+
     <main class="app-shell">
       <header class="hero">
-        <h1>Diario delle arnie</h1>
+        <div class="title-row">
+          <svg class="title-bee" aria-hidden="true"><use href="#bee"></use></svg>
+          <h1>Diario delle arnie</h1>
+        </div>
+        <svg class="flourish" viewBox="0 0 240 24" aria-hidden="true" focusable="false">
+          <line x1="8" y1="12" x2="88" y2="12"></line>
+          <polygon points="104,4 97.07,8 97.07,16 104,20 110.93,16 110.93,8"></polygon>
+          <polygon points="120,4 113.07,8 113.07,16 120,20 126.93,16 126.93,8"></polygon>
+          <polygon points="136,4 129.07,8 129.07,16 136,20 142.93,16 142.93,8"></polygon>
+          <line x1="152" y1="12" x2="232" y2="12"></line>
+        </svg>
       </header>
 
       <div class="date-bar">
