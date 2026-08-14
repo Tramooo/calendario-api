@@ -132,42 +132,33 @@ button {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   grid-template-rows: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  column-gap: 12px;
+  row-gap: 30px;
   min-height: 0;
+  padding-top: 24px;
 }
 
 .hive-card {
+  position: relative;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
-  gap: 6px;
   min-height: 0;
-  padding: 10px;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  background: var(--surface);
-  box-shadow: 0 8px 20px rgba(84, 59, 12, 0.07);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
-}
-
-.hive-card:focus-within {
-  border-color: var(--honey);
-  box-shadow: 0 10px 24px rgba(227, 154, 5, 0.22);
-}
-
-.hive-card.filled {
-  background: linear-gradient(180deg, #fffaef 0%, #ffffff 45%);
 }
 
 .hive-head {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 1;
   display: grid;
   place-items: center;
+  transform: translate(-50%, -52%);
 }
 
 .hive-icon {
   display: block;
   width: 46px;
   height: 46px;
+  filter: drop-shadow(0 3px 4px rgba(84, 59, 12, 0.2));
 }
 
 .hive-roof {
@@ -207,8 +198,9 @@ button {
 
 .saved-hint {
   position: absolute;
-  top: 2px;
-  right: 0;
+  top: 8px;
+  right: 10px;
+  z-index: 1;
   padding: 2px 7px;
   color: var(--honey-dark);
   border-radius: 999px;
@@ -230,13 +222,15 @@ button {
   height: 100%;
   min-height: 0;
   resize: none;
-  padding: 9px 10px;
+  padding: 32px 12px 10px;
   color: var(--text);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  background: #fffdf8;
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: 0 8px 20px rgba(84, 59, 12, 0.07);
   font-size: 0.88rem;
   line-height: 1.35;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .hive-note::placeholder {
@@ -245,7 +239,13 @@ button {
 
 .hive-note:focus {
   border-color: var(--honey);
-  outline: 2px solid rgba(227, 154, 5, 0.18);
+  outline: none;
+  box-shadow: 0 10px 24px rgba(227, 154, 5, 0.2);
+}
+
+.hive-card.filled .hive-note {
+  border-color: rgba(227, 154, 5, 0.5);
+  background: linear-gradient(180deg, #fffaef 0%, #ffffff 60%);
 }
 
 .calendar-dialog {
@@ -394,5 +394,14 @@ button {
   .hive-icon {
     width: 36px;
     height: 36px;
+  }
+
+  .hives-grid {
+    row-gap: 24px;
+    padding-top: 20px;
+  }
+
+  .hive-note {
+    padding-top: 26px;
   }
 }

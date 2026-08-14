@@ -148,8 +148,7 @@ function createHiveCard(hiveNumber) {
   textarea.addEventListener("input", () => scheduleSave(hiveNumber, textarea));
   textarea.addEventListener("blur", flushPendingSaves);
 
-  head.append(hint);
-  card.append(head, textarea);
+  card.append(textarea, head, hint);
   hivesGrid.append(card);
 
   return { card, textarea, hint };
