@@ -297,6 +297,31 @@ button {
   text-transform: uppercase;
 }
 
+.sync-status {
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  z-index: 3;
+  max-width: calc(100% - 32px);
+  margin: 0;
+  padding: 7px 16px;
+  color: var(--honey-dark);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--honey-soft);
+  box-shadow: 0 8px 20px rgba(84, 59, 12, 0.16);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.sync-status[data-tone="warning"] {
+  color: #8a4b06;
+  border-color: rgba(199, 106, 6, 0.35);
+  background: #fdead0;
+}
+
 .hives-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
