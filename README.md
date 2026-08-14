@@ -25,39 +25,45 @@ serverless su Vercel.
 
 ## Configurazione
 
-Serve una sola variabile d'ambiente obbligatoria:
+Se usi Neon tramite l'integrazione del Marketplace di Vercel non devi impostare nulla a mano:
+l'integrazione inietta da sola `DATABASE_URL` (pooled), `DATABASE_URL_UNPOOLED` (diretta) e le
+vecchie `POSTGRES_*`. L'app riconosce tutti questi nomi e preferisce la connessione pooled per le
+richieste, quella diretta per le migrazioni.
 
-- `DATABASE_URL`: stringa di connessione Neon, quella "pooled"
-  (`postgresql://...-pooler....neon.tech/neondb?sslmode=require`).
+Se invece colleghi Neon a mano, basta impostare `DATABASE_URL` con la connection string pooled.
 
-Variabile opzionale:
+Variabile opzionale, ma consigliata:
 
 - `APP_TOKEN`: se impostata, l'API accetta solo richieste con l'intestazione `x-app-token`.
-  Consigliata, perche altrimenti chiunque conosca l'indirizzo del sito puo leggere e scrivere note.
-  Dopo averla impostata, apri il sito una volta con `?token=IL_TUO_TOKEN`: il browser lo memorizza.
+  Senza di essa chiunque conosca l'indirizzo del sito puo leggere e scrivere le note.
+  Dopo averla aggiunta su Vercel, apri il sito una volta con `?token=IL_TUO_TOKEN`: il browser lo
+  memorizza e continui a usare l'app normalmente.
 
 ## Primo avvio
 
-1. Crea il progetto su [Neon](https://neon.com) e copia la connection string pooled.
-2. In locale, copia `.env.example` in `.env` e incolla la stringa in `DATABASE_URL`.
-3. Crea la tabella:
+La tabella va creata una sola volta. Due modi equivalenti.
+
+Dalla console Neon: apri il progetto, vai nell'SQL Editor e incolla il contenuto di
+`db/schema.sql`.
+
+Oppure dal tuo computer, scaricando le variabili dal progetto Vercel:
 
 ```bash
 npm install
+npx vercel link
+npx vercel env pull .env.local
 npm run migrate
 ```
 
-4. Su Vercel, aggiungi `DATABASE_URL` (e `APP_TOKEN` se la usi) tra le Environment Variables del
-   progetto, poi fai il deploy.
+Fatto questo, il deploy su Vercel funziona senza altri passaggi.
 
 ## Sviluppo locale
 
 ```bash
-npm install -g vercel
-npm run dev
+npx vercel dev
 ```
 
-`vercel dev` serve insieme la pagina e le funzioni in `api/`.
+`vercel dev` serve insieme la pagina e le funzioni in `api/`, usando le variabili di `.env.local`.
 
 ## Verifiche
 

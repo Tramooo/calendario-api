@@ -1,8 +1,8 @@
 import { readFile } from "node:fs/promises";
-import { getSql } from "../lib/db.mjs";
+import { createDirectSql } from "../lib/db.mjs";
 
 const schemaPath = new URL("../db/schema.sql", import.meta.url);
-const sql = getSql();
+const sql = createDirectSql();
 const statements = (await readFile(schemaPath, "utf8"))
   .split(";")
   .map((statement) => statement.trim())
