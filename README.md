@@ -4,11 +4,12 @@ App web statica per tenere traccia delle attivita svolte nelle arnie.
 
 ## Funzionalita
 
-- Titolo in alto e dashboard con 10 arnie.
+- Titolo in alto e 10 arnie disegnate, con il numero al centro di ognuna.
 - Disposizione delle arnie in 2 file da 5 su desktop.
-- Calendario mensile per ogni arnia.
-- Note giornaliere salvate nel browser tramite localStorage.
-- Indicatori sui giorni che hanno gia una nota.
+- Calendario mensile per l'arnia selezionata.
+- Nota del giorno con salvataggio automatico, senza pulsanti.
+- Pallino sui giorni che hanno gia una nota e tetto scuro sulle arnie con note.
+- Dati salvati nel browser tramite localStorage.
 
 ## Avvio locale
 
