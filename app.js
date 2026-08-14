@@ -99,13 +99,19 @@ function renderHives() {
 
   for (let hiveNumber = 1; hiveNumber <= HIVE_COUNT; hiveNumber += 1) {
     const button = document.createElement("button");
+    const number = document.createElement("span");
+    const meta = document.createElement("span");
+
     button.type = "button";
     button.className = `hive-card${hiveNumber === selectedHive ? " active" : ""}`;
     button.setAttribute("aria-pressed", String(hiveNumber === selectedHive));
-    button.innerHTML = `
-      <span class="hive-number">Arnia ${hiveNumber}</span>
-      <span class="hive-meta">${getLastActivityLabel(hiveNumber)}</span>
-    `;
+
+    number.className = "hive-number";
+    number.textContent = `Arnia ${hiveNumber}`;
+    meta.className = "hive-meta";
+    meta.textContent = getLastActivityLabel(hiveNumber);
+
+    button.append(number, meta);
     button.addEventListener("click", () => {
       selectedHive = hiveNumber;
       saveStatus.textContent = "";
