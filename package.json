@@ -1,10 +1,16 @@
 {
   "name": "calendario-arnie",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "App statica per tracciare le attivita svolte nelle arnie.",
+  "type": "module",
+  "description": "App per tracciare le attivita svolte nelle arnie, con database Neon su Vercel.",
   "scripts": {
-    "start": "python3 -m http.server 4173",
-    "check": "node --check app.js"
+    "dev": "vercel dev",
+    "migrate": "node --env-file-if-exists=.env scripts/migrate.mjs",
+    "test": "node scripts/test-api.mjs",
+    "check": "node --check app.js && node --check api/notes.mjs && node --check lib/db.mjs && node --check scripts/migrate.mjs"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.1.0"
   }
 }
