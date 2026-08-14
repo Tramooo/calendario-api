@@ -5,11 +5,11 @@ App web statica per tenere traccia delle attivita svolte nelle arnie.
 ## Funzionalita
 
 - Interfaccia su una sola schermata fissa, senza scorrimento verticale.
-- Titolo in alto e 10 arnie disegnate, con il numero al centro di ognuna.
-- Disposizione delle arnie in 2 file da 5.
-- Striscia compatta dei giorni del mese, con frecce per cambiare mese.
-- Nota del giorno con salvataggio automatico, senza pulsanti.
-- Pallino sui giorni che hanno gia una nota e tetto scuro sulle arnie con note.
+- Titolo in alto e selettore della data con frecce per scorrere i giorni.
+- Clic sulla data: si apre il calendario per scegliere un giorno preciso.
+- 10 arnie in 2 file da 5, ognuna con icona numerata e propria casella di testo.
+- Ogni casella salva da sola le attivita del giorno selezionato.
+- Pallino sui giorni del calendario che hanno gia delle note.
 - Dati salvati nel browser tramite localStorage.
 
 ## Avvio locale

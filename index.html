@@ -12,29 +12,56 @@
         <h1>Diario delle arnie</h1>
       </header>
 
-      <div id="hives-grid" class="hives-grid" aria-label="Le tue arnie"></div>
+      <div class="date-bar">
+        <button id="previous-day" class="arrow" type="button" aria-label="Giorno precedente">
+          &#8249;
+        </button>
+        <button
+          id="open-calendar"
+          class="date-display"
+          type="button"
+          aria-haspopup="dialog"
+          aria-label="Apri il calendario per scegliere una data"
+        >
+          <strong id="date-main"></strong>
+          <span id="today-badge" class="today-badge" hidden>Oggi</span>
+        </button>
+        <button id="next-day" class="arrow" type="button" aria-label="Giorno successivo">
+          &#8250;
+        </button>
+      </div>
 
-      <section class="planner">
-        <div class="planner-header">
-          <h2 id="planner-title"></h2>
-          <div class="month-controls">
-            <button id="previous-month" type="button" aria-label="Mese precedente">&#8249;</button>
-            <strong id="month-label"></strong>
-            <button id="next-month" type="button" aria-label="Mese successivo">&#8250;</button>
-          </div>
-        </div>
-
-        <div id="day-strip" class="day-strip" aria-label="Giorni del mese"></div>
-
-        <label id="note-label" class="note-label" for="note-text"></label>
-        <textarea
-          id="note-text"
-          class="note-text"
-          placeholder="Cosa hai fatto? Es. controllo covata, nutrizione, melario..."
-        ></textarea>
-        <p id="save-status" class="save-status" role="status" aria-live="polite"></p>
-      </section>
+      <section id="hives-grid" class="hives-grid" aria-label="Le tue arnie"></section>
     </main>
+
+    <dialog id="calendar-dialog" class="calendar-dialog" aria-label="Scegli una data">
+      <div class="calendar-head">
+        <button id="previous-month" class="arrow" type="button" aria-label="Mese precedente">
+          &#8249;
+        </button>
+        <strong id="month-label"></strong>
+        <button id="next-month" class="arrow" type="button" aria-label="Mese successivo">
+          &#8250;
+        </button>
+      </div>
+
+      <div class="weekdays" aria-hidden="true">
+        <span>Lun</span>
+        <span>Mar</span>
+        <span>Mer</span>
+        <span>Gio</span>
+        <span>Ven</span>
+        <span>Sab</span>
+        <span>Dom</span>
+      </div>
+
+      <div id="calendar-grid" class="calendar-grid"></div>
+
+      <div class="calendar-actions">
+        <button id="go-today" class="ghost-button" type="button">Vai a oggi</button>
+        <button id="close-calendar" class="ghost-button" type="button">Chiudi</button>
+      </div>
+    </dialog>
 
     <script src="app.js"></script>
   </body>
